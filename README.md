@@ -31,3 +31,14 @@ BLACKLIST_IGNORE_ADMINS=true
 ```
 
 Готово!
+
+
+## История звезд
+
+<a href="https://www.star-history.com/?repos=Blin4ickUSE%2Fban-vpn&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Blin4ickUSE/ban-vpn&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Blin4ickUSE/ban-vpn&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Blin4ickUSE/ban-vpn&type=date&legend=top-left" />
+ </picture>
+</a>
