@@ -1,0 +1,44 @@
+name: Sync upstream mirror
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream-mirror
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout automation branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync upstream main into mirror main
+        env:
+          UPSTREAM_REPO: https://github.com/Blin4ickUSE/ban-vpn.git
+          TARGET_BRANCH: main
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git remote add upstream "$UPSTREAM_REPO"
+          git fetch upstream main
+          git fetch origin "$TARGET_BRANCH"
+
+          if [ "$(git rev-parse "origin/$TARGET_BRANCH")" = "$(git rev-parse upstream/main)" ]; then
+            echo "Mirror already up to date."
+            exit 0
+          fi
+
+          git push --force-with-lease origin "upstream/main:$TARGET_BRANCH"
+
