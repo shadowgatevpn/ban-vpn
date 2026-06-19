@@ -1,0 +1,54 @@
+name: Sync upstream mirror
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream-mirror
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout mirror
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync upstream into main
+        env:
+          UPSTREAM_REPO: https://github.com/Blin4ickUSE/ban-vpn.git
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          preserve_dir="$(mktemp -d)"
+          mkdir -p "$preserve_dir/.github/workflows"
+          cp .github/workflows/sync-upstream.yml "$preserve_dir/.github/workflows/sync-upstream.yml"
+
+          upstream_dir="$(mktemp -d)"
+          git clone --depth 1 --branch main "$UPSTREAM_REPO" "$upstream_dir"
+          rm -rf "$upstream_dir/.git"
+
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a "$upstream_dir"/. .
+          mkdir -p .github/workflows
+          cp "$preserve_dir/.github/workflows/sync-upstream.yml" .github/workflows/sync-upstream.yml
+
+          if git diff --quiet; then
+            echo "Mirror already up to date."
+            exit 0
+          fi
+
+          git add -A
+          git commit -m "Sync upstream mirror"
+          git push origin HEAD:main
+
