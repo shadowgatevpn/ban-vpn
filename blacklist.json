@@ -2765,7 +2765,11 @@
   },
   {
     "telegram_id": 6186819030,
-    "username": "Шаринг8705037549 # Шаринг"
+    "username": "Шаринг"
+  },
+  {
+    "telegram_id": 8705037549,
+    "username": "Шаринг"
   },
   {
     "telegram_id": 8670103680,
@@ -3118,5 +3122,37 @@
   {
     "telegram_id": 8978785637,
     "username": "Абуз трафика"
+  },
+  {
+    "telegram_id": 5199897456,
+    "username": "DDoS"
+  },
+  {
+    "telegram_id": 8035667634,
+    "username": "DDoS"
+  },
+  {
+    "telegram_id": 8923504601,
+    "username": "Скам"
+  },
+  {
+    "telegram_id": 8734952704,
+    "username": "Скам"
+  },
+  {
+    "telegram_id": 8652449066,
+    "username": "Скам"
+  },
+  {
+    "telegram_id": 8740370729,
+    "username": "Рекламные предложения"
+  },
+  {
+    "telegram_id": 8817637814,
+    "username": "Вредительские действия"
+  },
+  {
+    "telegram_id": 6000751551,
+    "username": "Шаринг"
   }
 ]
